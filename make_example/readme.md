@@ -17,12 +17,18 @@ make_example/
  Makefile
  makefile.txt
 
+
 ## Build Instructions
-    Compile:
+
+To compile the project:
 ```bash
 make
 
-## Requirements
+To clean build files:
+
+make clean
+
+Requirements
 GCC
 Make
     
