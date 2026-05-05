@@ -3,7 +3,7 @@
 Flag,           Meaning,                                               Command Line Example,         Makefile Example
 -Wall,          Enable most useful warnings,                           gcc -Wall hello.c -o myprog,  CFLAGS += -Wall
 -Wextra,        Enable extra warnings (recommended with -Wall),        gcc -Wall -Wextra ...,        CFLAGS += -Wextra
--O0,            No optimization (best for debugging),			       gcc -O0 -g ...,				 CFLAGS += -O0
+-O0,            No optimization (best for debugging),		       gcc -O0 -g ...,		     CFLAGS += -O0
 -O2,		Good balance of speed & size (recommended for release),gcc -O2 ...,                  CFLAGS += -O2
 -O3,            Aggressive optimization (may increase code size),      gcc -O3 ...,                  CFLAGS += -O3
 -g,             Generate debug information (for gdb),                  gcc -g -O0 ...,               CFLAGS += -g
@@ -15,8 +15,7 @@ Flag,           Meaning,                                               Command L
 
 
 
--I/path/to/headers,	Add directory to header search path,	gcc -I/usr/local/include ...,        CFLAGS += -I/usr/
-                                                                                                              local/include
+-I/path/to/headers,	Add directory to header search path,	gcc -I/usr/local/include ...,        CFLAGS += -I/usr/local/include
 
 
 -DNAME=value,       Define a macro (like #define NAME value),       gcc -DDEBUG=1 ...,                   CFLAGS += -DDEBUG=1
