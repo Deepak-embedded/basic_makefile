@@ -16,9 +16,9 @@ It tells:
 | `make -n`         | Dry run (print commands only)      |
 | `make -f file.mk` | Use custom makefile                |
 | `make -q`         | Check whether target is up to date |
-|  echo $?	    | issue this cmd after the make -q cmd 
-		      return 1[target required rebuild ] 
-		      or 0[target up to date | 	
+|  echo $?	        | issue this cmd after the make -q cmd 
+		              return 1[target required rebuild ] 
+		              or 0[target up to date | 	
 
 what is target in make file and type :-
 
@@ -122,15 +122,15 @@ Example:
 Flag,           Meaning,                                                  Command Line Example,         Makefile Example
 -Wall          	Enable most useful warnings,                              gcc -Wall hello.c -o myprog,  CFLAGS += -Wall
 -Wextra        	Enable extra warnings (recommended with -Wall),           gcc -Wall -Wextra ...,        CFLAGS += -Wextra
--O0            	No optimization (best for debugging),		          gcc -O0 -g ...,		CFLAGS += -O0
--O2		Good balance of speed & size (recommended for release),   gcc -O2 ...,                  CFLAGS += -O2
+-O0            	No optimization (best for debugging),		              gcc -O0 -g ...,		CFLAGS += -O0
+-O2		 Good balance of speed & size (recommended for release),          gcc -O2 ...,                  CFLAGS += -O2
 -O3             Aggressive optimization (may increase code size),         gcc -O3 ...,                  CFLAGS += -O3
 -g              Generate debug information (for gdb),                     gcc -g -O0 ...,               CFLAGS += -g
 -std=c99        Set C language standard,                                  gcc -std=c99 ...,             CFLAGS += -std=c99
--std=c11 	Set C language standard,                                  gcc -std=c11 ...,             CFLAGS += -std=c11
--std=gnu11	Set C language standard,                                  gcc -std=gnull ...,           CFLAGS += -std=gnull
--MMD            preprocessor instruction that automates 	          gcc -MMD			CFLAGS += -MMD
-		the tracking of header files
+-std=c11 	    Set C language standard,                                  gcc -std=c11 ...,             CFLAGS += -std=c11
+-std=gnu11	    Set C language standard,                                  gcc -std=gnull ...,           CFLAGS += -std=gnull
+-MMD            preprocessor instruction that automates 	              gcc -MMD			            CFLAGS += -MMD
+		       the tracking of header files
 
 
 
