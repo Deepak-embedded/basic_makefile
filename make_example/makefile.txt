@@ -1,16 +1,135 @@
+what is makefile :-
+
+A Makefile is a special file used by the make build tool to automate compilation and build processes.
+
+It tells:
+	what to build
+	how to build
+	dependencies between files
+	commands to execute
+
+| Command           | Meaning                            |
+| ----------------- | ---------------------------------- |
+| `make`            | Build project                      |
+| `make clean`      | Remove build files                 |
+| `make -j4`        | Parallel build                     |
+| `make -n`         | Dry run (print commands only)      |
+| `make -f file.mk` | Use custom makefile                |
+| `make -q`         | Check whether target is up to date |
+|  echo $?	    | issue this cmd after the make -q cmd 
+		      return 1[target required rebuild ] 
+		      or 0[target up to date | 	
+
+what is target in make file and type :-
+
+>Target is somthing that make tries to build or execute.
+
+Basic syntex :- target: dependencies						
+			command
+						
+Example :-      main.o: main.c
+			gcc -c main.c -o main.o
+						
+Here:-
+main.o → target
+main.c → dependency
+gcc -c ... → command (recipe)
+
+Type of Target :-
+
+>File Target :- This Target create a real file.
+
+Example :- app:main.o uart.o
+	   	gcc main.o uart.o -o app
+
+Here:-				
+Target = app
+	After build, file app exists.
+	make checks timestamps:
+	If main.o changed → rebuild app
+	If nothing changed → skip
+	
+>Phony Target :- A Target that is not real file.
+
+Used for action like:
+			Clean
+			run
+			install
+			flash
+Why .PHONY?
+Suppose a file named clean exists.
+Without .PHONY, make clean may not run.
+
+Example :- .phony:clean
+		   clean:
+			 rm -f *.o app a real file.
+			
+
+>Pattern Target:- Used for automatic rules using %
+
+Example :- %.o:%.c
+		gcc -c $< -o $@
+			   
+Meaning :-any %.o file depends on matching %.c file
+
+Example conversion:
+	main.o ← main.c
+	uart.o ← uart.c
+Automatic variables:
+	$@ → target name
+	$< → first dependency
+
+>Default Target :- The first Target in Makefile
+Example :- 
+	all:	app
+Meaning :-
+	if user run make the this will run first.
+	
+>Static Pattern Target
+	Applies one rule to specific files.
+Example :-
+	objects = main.o uart.o
+
+	$(objects): %.o: %.c
+		gcc -c $< -o $@
+Meaning :-
+	Only applies to listed object files.
+>Double colon Target :-Allows multiple independent rules for same target.
+target:: 
+	echo first
+target::
+	echo second
+Meaning :-Both execute
+>Common Real World Target :- example embedded makefile
+
+Example:
+	all: firmware.bin
+
+	firmware.bin: main.o can.o modbus.o
+		arm-none-eabi-gcc $^ -o $@
+	clean:
+		rm -f *.o firmware.bin
+
+	flash:
+		st-flash write firmware.bin 0x8000000
+
+
+
+
+
 #gcc compile flags:-
 
-Flag,           Meaning,                                               Command Line Example,         Makefile Example
--Wall,          Enable most useful warnings,                           gcc -Wall hello.c -o myprog,  CFLAGS += -Wall
--Wextra,        Enable extra warnings (recommended with -Wall),        gcc -Wall -Wextra ...,        CFLAGS += -Wextra
--O0,            No optimization (best for debugging),		       gcc -O0 -g ...,		     CFLAGS += -O0
--O2,		Good balance of speed & size (recommended for release),gcc -O2 ...,                  CFLAGS += -O2
--O3,            Aggressive optimization (may increase code size),      gcc -O3 ...,                  CFLAGS += -O3
--g,             Generate debug information (for gdb),                  gcc -g -O0 ...,               CFLAGS += -g
--std=c99        Set C language standard,                               gcc -std=c99 ...,             CFLAGS += -std=c99
--std=c11 	Set C language standard,                               gcc -std=c11 ...,             CFLAGS += -std=c11
--std=gnu11,	Set C language standard,                               gcc -std=gnull ...,           CFLAGS += -std=gnull
--MMD            preprocessor instruction that automates 	       gcc -MMD			     CFLAGS += -MMD
+Flag,           Meaning,                                                  Command Line Example,         Makefile Example
+-Wall          	Enable most useful warnings,                              gcc -Wall hello.c -o myprog,  CFLAGS += -Wall
+-Wextra        	Enable extra warnings (recommended with -Wall),           gcc -Wall -Wextra ...,        CFLAGS += -Wextra
+-O0            	No optimization (best for debugging),		          gcc -O0 -g ...,		CFLAGS += -O0
+-O2		Good balance of speed & size (recommended for release),   gcc -O2 ...,                  CFLAGS += -O2
+-O3             Aggressive optimization (may increase code size),         gcc -O3 ...,                  CFLAGS += -O3
+-g              Generate debug information (for gdb),                     gcc -g -O0 ...,               CFLAGS += -g
+-std=c99        Set C language standard,                                  gcc -std=c99 ...,             CFLAGS += -std=c99
+-std=c11 	Set C language standard,                                  gcc -std=c11 ...,             CFLAGS += -std=c11
+-std=gnu11	Set C language standard,                                  gcc -std=gnull ...,           CFLAGS += -std=gnull
+-MMD            preprocessor instruction that automates 	          gcc -MMD			CFLAGS += -MMD
 		the tracking of header files
 
 

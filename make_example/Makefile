@@ -5,7 +5,7 @@ $(info === Build Information ===)
 #assigne gcc compiler to CC variable
 CC      = gcc
 #assigne c flags to CFLAGS variable
-CFLAGS	= -Wall -Wextra -O3 -g -DON=1 -MMD
+CFLAGS	= -Wall -Wextra -O3 -g  -DON=1 -MMD
 LDFLAGS	= 
 
 #assigne linker flag to MODBUS_LIBS ,pkg-config will take care of linker flag (-l and -L)
@@ -17,7 +17,7 @@ LDFLAGS += $(MODBUS_LIBS)
 
 #creating targert for program
 BUILD_DIR	= build
-TARGET  = $(BUILD_DIR)/bin
+TARGET  = $(BUILD_DIR)/binary
 #assigne sorce file to SRC variable
 SRC	= hello.c source1.c
 #creating object file of all source file and copy it to into build directory and  assigne it to OBJ
